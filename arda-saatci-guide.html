@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARDA SAATÇI — БЕГОВОЙ ГАЙД</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #e8001c;
+    --red-dim: #8a0010;
+    --white: #f5f0eb;
+    --offwhite: #c8c0b5;
+    --dark: #0a0a08;
+    --charcoal: #111110;
+    --mid: #1e1e1b;
+    --panel: #161614;
+    --accent: #d4a843;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, transparent 30%, rgba(10,10,8,0.7) 65%, var(--dark) 100%),
+      linear-gradient(90deg, rgba(10,10,8,0.6) 0%, transparent 60%);
+    z-index: 2;
+  }
+
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    background:
+      url('https://images.redbull.com/rbx/videos/cp_share_id:1331835946780516352/w_1920,h_1080,q_auto,f_auto/201521/00001') center/cover no-repeat,
+      url('https://images.redbull.com/rbx/image/upload/q_auto,f_auto/redbullcom/2026/5/10/zvqchgc3fzhopqbxgphm') center/cover no-repeat,
+      linear-gradient(135deg, #1a0a0a 0%, #0d0d0b 50%, #141210 100%);
+    background-size: cover;
+    background-position: center top;
+    filter: contrast(1.1) saturate(0.85);
+  }
+
+  /* Fallback pattern when image doesn't load */
+  .hero-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 60px,
+        rgba(232,0,28,0.03) 60px,
+        rgba(232,0,28,0.03) 61px
+      );
+  }
+
+  .hero-runner-img {
+    position: absolute;
+    right: -2%;
+    bottom: 0;
+    height: 95%;
+    width: auto;
+    z-index: 3;
+    filter: contrast(1.15) saturate(0.9);
+    opacity: 0.92;
+  }
+
+  .hero-number {
+    position: absolute;
+    right: 2%;
+    top: 8%;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(120px, 18vw, 320px);
+    color: rgba(232,0,28,0.06);
+    line-height: 1;
+    z-index: 2;
+    letter-spacing: -0.03em;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 4;
+    padding: 0 6vw 7vh;
+  }
+
+  .hero-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-label::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--red);
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(64px, 10vw, 160px);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  h1 span {
+    color: var(--red);
+    display: block;
+  }
+
+  .hero-subtitle {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(14px, 2vw, 20px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--offwhite);
+    letter-spacing: 0.08em;
+    margin-bottom: 40px;
+    max-width: 500px;
+    line-height: 1.5;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    border-left: 2px solid var(--red);
+    padding-left: 14px;
+  }
+
+  .stat-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--offwhite);
+    margin-top: 2px;
+  }
+
+  /* ── SCROLL HINT ── */
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.5;
+  }
+
+  .scroll-hint span {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--offwhite);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--offwhite), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,8,0.96);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(232,0,28,0.2);
+    padding: 0 6vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.08em;
+    color: var(--white);
+  }
+
+  .nav-logo span { color: var(--red); }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--offwhite);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--red); }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 100px 6vw;
+  }
+
+  .section-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-eyebrow::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--red);
+  }
+
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 6vw, 80px);
+    line-height: 0.95;
+    letter-spacing: 0.03em;
+    color: var(--white);
+    margin-bottom: 40px;
+  }
+
+  h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(18px, 2.5vw, 28px);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  p {
+    font-size: clamp(14px, 1.5vw, 16px);
+    line-height: 1.75;
+    color: var(--offwhite);
+    max-width: 680px;
+  }
+
+  /* ── QUOTE BLOCK ── */
+  .quote-block {
+    position: relative;
+    background: var(--panel);
+    border-left: 4px solid var(--red);
+    padding: 32px 36px;
+    margin: 60px 0;
+  }
+
+  .quote-block::before {
+    content: '"';
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 120px;
+    color: rgba(232,0,28,0.12);
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    line-height: 1;
+  }
+
+  .quote-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(20px, 3vw, 30px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--white);
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+  }
+
+  .quote-attr {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-top: 16px;
+    font-style: normal;
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-img-wrap {
+    position: relative;
+  }
+
+  .about-img-wrap img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    display: block;
+    filter: contrast(1.1) saturate(0.9);
+  }
+
+  .about-img-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(to top, var(--dark), transparent);
+  }
+
+  .about-img-credit {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(200,192,181,0.6);
+    z-index: 2;
+  }
+
+  .about-img-fallback {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background:
+      linear-gradient(160deg, #1a0a0a 0%, #0e0e0c 40%, #121008 100%),
+      repeating-linear-gradient(
+        -30deg,
+        transparent,
+        transparent 40px,
+        rgba(232,0,28,0.04) 40px,
+        rgba(232,0,28,0.04) 41px
+      );
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .about-img-fallback-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    color: rgba(232,0,28,0.3);
+    letter-spacing: 0.1em;
+    line-height: 1;
+  }
+
+  .about-img-fallback-sub {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(200,192,181,0.4);
+  }
+
+  .about-text .section-eyebrow { margin-bottom: 16px; }
+
+  .about-text p { margin-bottom: 20px; }
+
+  .bio-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 32px;
+  }
+
+  .bio-tag {
+    border: 1px solid rgba(232,0,28,0.4);
+    padding: 5px 14px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--offwhite);
+  }
+
+  /* ── TIMELINE ── */
+  #timeline { background: var(--charcoal); }
+
+  .timeline {
+    position: relative;
+    margin-top: 60px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 120px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--red), rgba(232,0,28,0.1));
+  }
+
+  .tl-item {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 40px;
+    padding: 32px 0;
+    position: relative;
+  }
+
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: 115px;
+    top: 40px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 16px rgba(232,0,28,0.6);
+  }
+
+  .tl-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--red);
+    line-height: 1;
+    text-align: right;
+    padding-right: 20px;
+    padding-top: 6px;
+  }
+
+  .tl-body h3 { margin-bottom: 8px; }
+  .tl-body p { max-width: 560px; }
+
+  .tl-badge {
+    display: inline-block;
+    background: rgba(232,0,28,0.12);
+    border: 1px solid rgba(232,0,28,0.3);
+    padding: 3px 10px;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 10px;
+  }
+
+  /* ── TRAINING GRID ── */
+  #training { background: var(--dark); }
+
+  .training-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .training-card {
+    background: var(--panel);
+    padding: 36px 30px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .training-card:hover { background: var(--mid); }
+
+  .training-card::before {
+    content: attr(data-num);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 120px;
+    color: rgba(232,0,28,0.05);
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .card-icon {
+    width: 36px;
+    height: 2px;
+    background: var(--red);
+    margin-bottom: 20px;
+  }
+
+  .training-card h3 { font-size: 18px; margin-bottom: 12px; }
+  .training-card p { font-size: 14px; line-height: 1.7; max-width: 100%; }
+
+  .training-card .highlight {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+  }
+
+  /* ── WEEK PLAN ── */
+  #week { background: var(--charcoal); }
+
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .day-card {
+    background: var(--panel);
+    padding: 24px 18px;
+    min-height: 200px;
+    position: relative;
+  }
+
+  .day-card.rest {
+    background: rgba(14,14,12,0.5);
+    opacity: 0.65;
+  }
+
+  .day-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--red);
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+    display: block;
+    border-bottom: 1px solid rgba(232,0,28,0.2);
+    padding-bottom: 10px;
+  }
+
+  .day-type {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .day-desc {
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--offwhite);
+    max-width: 100%;
+  }
+
+  .day-vol {
+    position: absolute;
+    bottom: 16px;
+    left: 18px;
+    right: 18px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: rgba(245,240,235,0.12);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── NUTRITION ── */
+  #nutrition { background: var(--dark); }
+
+  .nutrition-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 60px;
+    align-items: start;
+  }
+
+  .macro-bars { margin-bottom: 40px; }
+
+  .macro-bar-item { margin-bottom: 20px; }
+
+  .macro-bar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .macro-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .macro-pct {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--red);
+  }
+
+  .bar-track {
+    height: 4px;
+    background: rgba(255,255,255,0.07);
+    position: relative;
+  }
+
+  .bar-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--red), var(--red-dim));
+    position: relative;
+  }
+
+  .bar-fill::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -4px;
+    width: 2px;
+    height: 12px;
+    background: var(--white);
+  }
+
+  .meal-list { list-style: none; }
+
+  .meal-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .meal-time {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    color: var(--red);
+    line-height: 1;
+    min-width: 70px;
+  }
+
+  .meal-body {}
+  .meal-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .meal-detail { font-size: 13px; line-height: 1.5; color: var(--offwhite); max-width: 100%; }
+
+  .calorie-banner {
+    background: var(--red);
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 32px;
+  }
+
+  .calorie-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 5vw, 60px);
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .calorie-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-top: 4px;
+  }
+
+  .calorie-note {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-style: italic;
+    color: rgba(255,255,255,0.75);
+    max-width: 240px;
+    line-height: 1.5;
+    text-align: right;
+  }
+
+  /* ── TECHNIQUE ── */
+  #technique { background: var(--charcoal); }
+
+  .technique-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .tech-card {
+    background: var(--panel);
+    padding: 40px 36px;
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 24px;
+    align-items: start;
+    transition: background 0.3s;
+  }
+
+  .tech-card:hover { background: var(--mid); }
+
+  .tech-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    color: rgba(232,0,28,0.3);
+    line-height: 1;
+  }
+
+  .tech-card h3 { font-size: 16px; margin-bottom: 10px; }
+  .tech-card p { font-size: 13px; line-height: 1.7; max-width: 100%; }
+
+  /* ── MENTAL ── */
+  #mental { background: var(--dark); }
+
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .principle {
+    background: var(--panel);
+    padding: 36px 32px;
+    position: relative;
+  }
+
+  .principle-line {
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, var(--red), transparent);
+    margin-bottom: 24px;
+  }
+
+  .principle h3 { font-size: 16px; margin-bottom: 10px; }
+  .principle p { font-size: 13px; line-height: 1.75; max-width: 100%; }
+
+  /* ── PHOTO STRIP ── */
+  .photo-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    padding: 0;
+    margin: 0 -6vw;
+  }
+
+  .strip-cell {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    position: relative;
+    background: var(--mid);
+  }
+
+  .strip-cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(20%) contrast(1.1);
+    transition: transform 0.5s ease, filter 0.5s ease;
+  }
+
+  .strip-cell:hover img {
+    transform: scale(1.05);
+    filter: grayscale(0%) contrast(1.1);
+  }
+
+  .strip-cell-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(160deg, #1a0a0a, #0d0d0b);
+  }
+
+  .strip-cell-fallback span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: rgba(232,0,28,0.2);
+    letter-spacing: 0.1em;
+  }
+
+  .strip-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    background: linear-gradient(to top, rgba(10,10,8,0.9) 0%, transparent 100%);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--offwhite);
+  }
+
+  /* ── RECOVERY ── */
+  #recovery { background: var(--charcoal); }
+
+  .recovery-list {
+    list-style: none;
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .recovery-item {
+    background: var(--panel);
+    padding: 32px 28px;
+  }
+
+  .rec-icon {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: var(--red);
+    line-height: 1;
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+  }
+
+  .recovery-item h3 { font-size: 16px; margin-bottom: 10px; }
+  .recovery-item p { font-size: 13px; line-height: 1.7; max-width: 100%; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--charcoal);
+    border-top: 1px solid rgba(232,0,28,0.15);
+    padding: 60px 6vw 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: end;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    letter-spacing: 0.06em;
+    line-height: 0.9;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .footer-logo span { color: var(--red); }
+
+  .footer-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(200,192,181,0.6);
+    max-width: 360px;
+  }
+
+  .footer-right {
+    text-align: right;
+  }
+
+  .footer-motto {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(18px, 2.5vw, 28px);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--offwhite);
+    line-height: 1.4;
+    margin-bottom: 20px;
+  }
+
+  .footer-copy {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(200,192,181,0.35);
+  }
+
+  /* ── RED DIVIDER ── */
+  .red-rule {
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, var(--red), var(--red-dim), transparent);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-content > * {
+    animation: fadeUp 0.9s ease both;
+  }
+
+  .hero-label { animation-delay: 0.1s; }
+  h1 { animation-delay: 0.25s; }
+  .hero-subtitle { animation-delay: 0.4s; }
+  .hero-stats { animation-delay: 0.55s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    #about { grid-template-columns: 1fr; }
+    .training-grid { grid-template-columns: 1fr; }
+    .week-grid { grid-template-columns: repeat(4, 1fr); }
+    .nutrition-layout { grid-template-columns: 1fr; }
+    .technique-grid { grid-template-columns: 1fr; }
+    .principles { grid-template-columns: 1fr; }
+    .recovery-list { grid-template-columns: 1fr; }
+    .photo-strip { grid-template-columns: repeat(2, 1fr); }
+    footer { grid-template-columns: 1fr; }
+    .footer-right { text-align: left; }
+    .timeline::before { left: 70px; }
+    .tl-item { grid-template-columns: 70px 1fr; gap: 24px; }
+    .tl-item::before { left: 66px; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-img"></div>
+  <div class="hero-number">600</div>
+
+  <!-- Main runner image with multiple fallback sources -->
+  <img class="hero-runner-img"
+    src="https://img.redbull.com/images/c_fill,g_auto,w_800,h_1200/q_auto:low,f_auto/redbullcom/2024/6/20/arda-saatci-ultramarathon-berlin-new-york.jpg"
+    onerror="this.src='https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=800'; this.onerror=null"
+    alt="Arda Saatçi running"
+  >
+
+  <div class="hero-content">
+    <div class="hero-label">Беговой гайд · Red Bull Athlete</div>
+    <h1>Arda<span>Saatçi</span></h1>
+    <p class="hero-subtitle">«Ты — не твоя голова и не твоё тело. Ты — воля между ними»</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-val">600 КМ</div>
+        <div class="stat-label">Death Valley → Santa Monica</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">3 000 КМ</div>
+        <div class="stat-label">Берлин → Нью-Йорк</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">30 Ч</div>
+        <div class="stat-label">Тренировок в неделю</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Листай</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Arda <span>Saatçi</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">О нём</a></li>
+    <li><a href="#training">Тренировки</a></li>
+    <li><a href="#week">Неделя</a></li>
+    <li><a href="#nutrition">Питание</a></li>
+    <li><a href="#technique">Техника</a></li>
+    <li><a href="#mental">Ментал</a></li>
+    <li><a href="#recovery">Восстановление</a></li>
+    <li><a href="#gear">Экипировка</a></li>
+    <li><a href="#diary">Ultra 600</a></li>
+    <li><a href="#beginner">Новичкам</a></li>
+    <li><a href="#calculator">Калькулятор</a></li>
+  </ul>
+</nav>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-img-wrap">
+    <img
+      src="https://img.redbull.com/images/c_fill,g_auto,w_600,h_800/q_auto:low,f_auto/redbullcom/2026/5/9/arda-saatci-ultra-600-death-valley.jpg"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+      alt="Arda Saatçi"
+    >
+    <div class="about-img-fallback" style="display:none;">
+      <div class="about-img-fallback-text">ARDA</div>
+      <div class="about-img-fallback-sub">@ardasaatci · 3M+ подписчиков</div>
+    </div>
+    <div class="about-img-credit">📸 Red Bull Content Pool</div>
+  </div>
+
+  <div class="about-text">
+    <div class="section-eyebrow">Кто такой</div>
+    <h2>«Фитнес‑киборг» из Берлина</h2>
+
+    <p>Arda Saatçi — немецкий ультра-атлет турецкого происхождения, родившийся в Берлине в 1997 году. В детстве мечтал стать профессиональным футболистом, выступал за молодёжные команды Berliner AK и SV Altlüdersdorf. В 18 лет травма поставила крест на карьере.</p>
+
+    <p>Не сломившись, он начал искать новое призвание — боксировал, плавал, занимался силовыми тренировками. Затем открыл для себя бег. Сегодня он тренируется до 30 часов в неделю и называет это «ежедневной битвой с собой».</p>
+
+    <p>Его философия проста: каждое утро — это день один. Нет прошлых достижений, нет прошлых поражений. Только сегодня и выбор, кем ты будешь.</p>
+
+    <div class="quote-block">
+      <div class="quote-text">Твоя голова говорит «стоп». Тело говорит «не могу». Оба лгут.</div>
+      <div class="quote-attr">— Arda Saatçi</div>
+    </div>
+
+    <div class="bio-tags">
+      <span class="bio-tag">Берлин, 1997</span>
+      <span class="bio-tag">Red Bull Athlete</span>
+      <span class="bio-tag">Brooks Running</span>
+      <span class="bio-tag">3M+ подписчиков</span>
+      <span class="bio-tag">VideoDays Award</span>
+      <span class="bio-tag">Ультра-атлет</span>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO STRIP -->
+<div class="photo-strip" style="padding: 0; overflow: hidden;">
+  <div class="strip-cell">
+    <img
+      src="https://img.redbull.com/images/c_fill,g_auto,w_500,h_666/q_auto:low,f_auto/redbullcom/2024/6/20/arda-saatci-berlin-new-york-run.jpg"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+      alt="Берлин — Нью-Йорк"
+    >
+    <div class="strip-cell-fallback" style="display:none;"><span>2024</span></div>
+    <div class="strip-overlay">Берлин → Нью-Йорк</div>
+  </div>
+  <div class="strip-cell">
+    <img
+      src="https://img.redbull.com/images/c_fill,g_auto,w_500,h_666/q_auto:low,f_auto/redbullcom/2025/9/15/arda-saatci-japan-run.jpg"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+      alt="Япония"
+    >
+    <div class="strip-cell-fallback" style="display:none;"><span>2025</span></div>
+    <div class="strip-overlay">Япония · 43 дня</div>
+  </div>
+  <div class="strip-cell">
+    <img
+      src="https://img.redbull.com/images/c_fill,g_auto,w_500,h_666/q_auto:low,f_auto/redbullcom/2026/5/10/arda-saatci-death-valley.jpg"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+      alt="Death Valley"
+    >
+    <div class="strip-cell-fallback" style="display:none;"><span>2026</span></div>
+    <div class="strip-overlay">Death Valley · 600 km</div>
+  </div>
+  <div class="strip-cell">
+    <img
+      src="https://img.redbull.com/images/c_fill,g_auto,w_500,h_666/q_auto:low,f_auto/redbullcom/2026/5/10/arda-saatci-santa-monica.jpg"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+      alt="Финиш"
+    >
+    <div class="strip-cell-fallback" style="display:none;"><span>ФИНИШ</span></div>
+    <div class="strip-overlay">Санта-Моника · Финиш</div>
+  </div>
+</div>
+
+<div class="red-rule"></div>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="section-eyebrow">Путь атлета</div>
+  <h2>Хронология рекордов</h2>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-year">1997</div>
+      <div class="tl-body">
+        <span class="tl-badge">Начало</span>
+        <h3>Рождение в Берлине</h3>
+        <p>Arda появился на свет в берлинском районе Лихтерфельде. Семья с турецкими корнями. С 6 лет — на футбольном поле. Мечта одна: стать профи.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">2015</div>
+      <div class="tl-body">
+        <span class="tl-badge">Перелом</span>
+        <h3>Конец футбольной карьеры</h3>
+        <p>Травма в 18 лет. Berliner AK, SV Altlüdersdorf — всё позади. Вместо депрессии — бизнес-администрирование, стройка и поиск себя заново.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">2019</div>
+      <div class="tl-body">
+        <span class="tl-badge">Трансформация</span>
+        <h3>Рождение «Киборга»</h3>
+        <p>Отказался от бокса, начал совмещать силовые с бегом. Цель — быть в лучшей форме в любой комнате. Постепенно это переросло в экстремальные вызовы.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">2024</div>
+      <div class="tl-body">
+        <span class="tl-badge">Мировое внимание</span>
+        <h3>Берлин → Нью-Йорк · 3 000 км</h3>
+        <p>74 дня, около 2 марафонов в день. Посреди пути — стрессовый перелом ноги. Он не остановился. Финиш в Нью-Йорке. Премия VideoDays в категории «Спорт».</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">2025</div>
+      <div class="tl-body">
+        <span class="tl-badge">Cyborg Season II</span>
+        <h3>Япония с севера на юг · 3 028 км</h3>
+        <p>43 дня, до 80 км в день. Весь путь преодолён в кроссовках Brooks Glycerin Max. Парнёрство с Brooks Running. Открытие Brooks Hyperion House на Берлинском марафоне.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">2026</div>
+      <div class="tl-body">
+        <span class="tl-badge">Cyborg Season III</span>
+        <h3>Ultra 600 · Death Valley → Santa Monica</h3>
+        <p>600 км за 123 часа 21 минуту. Температура асфальта до 60°C. Потеря до 1.5 л пота в час. 75 000 сожжённых калорий. Более 1 млн зрителей в прямом эфире на YouTube.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAINING -->
+<section id="training">
+  <div class="section-eyebrow">Система подготовки</div>
+  <h2>Тренировочные фазы</h2>
+
+  <div class="training-grid">
+    <div class="training-card" data-num="01">
+      <div class="card-icon"></div>
+      <h3>База · Аэробный фундамент</h3>
+      <p>Первые 8–12 недель строятся исключительно на объёме при низком пульсе (зона 2). Arda бежит долгие медленные дистанции: от 60 до 100 км в неделю. Никакой форсированной скорости — только адаптация митохондрий и капиллярной сети мышц.</p>
+      <div class="highlight">60–100 км/нед · ЧСС зона 2</div>
+    </div>
+
+    <div class="training-card" data-num="02">
+      <div class="card-icon"></div>
+      <h3>Объём · Накопление усталости</h3>
+      <p>Недельный блок нарастает до 150–200 км. Вводятся длинные тренировки по 80–100 км за раз. Во время подготовки к Ultra 600 он провёл 7-дневный блок с суммой 242 км. Организм учится работать истощённым.</p>
+      <div class="highlight">до 242 км за 7 дней</div>
+    </div>
+
+    <div class="training-card" data-num="03">
+      <div class="card-icon"></div>
+      <h3>Сила · Параллельный тренинг</h3>
+      <p>В отличие от классических ультра-бегунов, Arda не отказывается от силовых. Жим, подтягивания (1 000 за 2 часа!), кор-работа. Более мускулистое тело лучше переносит монотонную нагрузку и предотвращает травмы.</p>
+      <div class="highlight">1 000 подтягиваний · &lt; 2 часов</div>
+    </div>
+
+    <div class="training-card" data-num="04">
+      <div class="card-icon"></div>
+      <h3>Специфика · Симуляция условий</h3>
+      <p>Перед Ultra 600 он тренировался в тепловом снаряжении на беговой дорожке — имитируя жару Долины Смерти. Тренировки в Red Bull Athlete Performance Center в Санта-Монике. Акклиматизация в Калифорнии за 2 недели до старта.</p>
+      <div class="highlight">Тепловые симуляции · RBAPC</div>
+    </div>
+
+    <div class="training-card" data-num="05">
+      <div class="card-icon"></div>
+      <h3>Депривация сна · Ментальная готовность</h3>
+      <p>32-часовой период без сна входит в стандартную подготовку. Цель — научить тело и разум функционировать в условиях критического истощения. Мозг привыкает не паниковать при галлюцинациях и дезориентации.</p>
+      <div class="highlight">32 часа без сна · штатная практика</div>
+    </div>
+
+    <div class="training-card" data-num="06">
+      <div class="card-icon"></div>
+      <h3>Тейпер · Финальные 2 недели</h3>
+      <p>Объём режется на 40–50%. Пробежки — короткие и свежие. Акцент на качественный сон, питание и ментальную визуализацию. Организм суперкомпенсирует накопленную нагрузку и выходит на пик формы к старту.</p>
+      <div class="highlight">−50% объёма · сон ≥ 9 ч</div>
+    </div>
+  </div>
+</section>
+
+<!-- WEEK PLAN -->
+<section id="week">
+  <div class="section-eyebrow">Недельная структура</div>
+  <h2>Типичная тренировочная неделя</h2>
+
+  <div class="week-grid">
+    <div class="day-card">
+      <span class="day-name">ПН</span>
+      <div class="day-type">Длинный бег</div>
+      <div class="day-desc">Зона 2, 25–35 км. Темп разговорный. Фокус на технике и дыхании. Утром натощак.</div>
+      <div class="day-vol">30K</div>
+    </div>
+    <div class="day-card">
+      <span class="day-name">ВТ</span>
+      <div class="day-type">Сила + Бег</div>
+      <div class="day-desc">Утро: силовые 60–75 мин. Вечер: 12–15 км восстановительный бег.</div>
+      <div class="day-vol">15K</div>
+    </div>
+    <div class="day-card">
+      <span class="day-name">СР</span>
+      <div class="day-type">Интервалы</div>
+      <div class="day-desc">8–12 × 1 км с отдыхом 90 сек. Либо темповый бег 10–14 км. Зона 4.</div>
+      <div class="day-vol">14K</div>
+    </div>
+    <div class="day-card">
+      <span class="day-name">ЧТ</span>
+      <div class="day-type">Восстановление</div>
+      <div class="day-desc">Лёгкий бег 8–10 км. Зона 1. Растяжка, МФР-ролл, сауна. Сон в приоритете.</div>
+      <div class="day-vol">10K</div>
+    </div>
+    <div class="day-card">
+      <span class="day-name">ПТ</span>
+      <div class="day-type">Бег + Плавание</div>
+      <div class="day-desc">15–20 км средний темп + 1 км активное плавание для разгрузки суставов.</div>
+      <div class="day-vol">20K</div>
+    </div>
+    <div class="day-card">
+      <span class="day-name">СБ</span>
+      <div class="day-type">Ультра-длинный</div>
+      <div class="day-desc">30–50 км и более. Симуляция гоночных условий. Питание каждые 40–45 мин. Возможен ночной старт.</div>
+      <div class="day-vol">50K</div>
+    </div>
+    <div class="day-card rest">
+      <span class="day-name">ВС</span>
+      <div class="day-type">Отдых</div>
+      <div class="day-desc">Только ходьба и растяжка. Никаких тренировок. Перезарядка тела и нервной системы.</div>
+      <div class="day-vol">REST</div>
+    </div>
+  </div>
+</section>
+
+<!-- NUTRITION -->
+<section id="nutrition">
+  <div class="section-eyebrow">Питание и топливо</div>
+  <h2>Что ест Arda Saatçi</h2>
+
+  <div class="nutrition-layout">
+    <div>
+      <div class="macro-bars">
+        <h3 style="margin-bottom: 28px; font-size: 14px; letter-spacing: 0.2em; color: var(--offwhite);">МАКРОНУТРИЕНТЫ В БАЗОВЫЙ ДЕНЬ (≈ 4 000 ККАЛ)</h3>
+
+        <div class="macro-bar-item">
+          <div class="macro-bar-header">
+            <span class="macro-name">Углеводы</span>
+            <span class="macro-pct">55%</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:55%"></div></div>
+        </div>
+
+        <div class="macro-bar-item">
+          <div class="macro-bar-header">
+            <span class="macro-name">Белки</span>
+            <span class="macro-pct">25%</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:25%"></div></div>
+        </div>
+
+        <div class="macro-bar-item">
+          <div class="macro-bar-header">
+            <span class="macro-name">Жиры</span>
+            <span class="macro-pct">20%</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:20%"></div></div>
+        </div>
+      </div>
+
+      <div class="calorie-banner">
+        <div>
+          <div class="calorie-num">15 000</div>
+          <div class="calorie-label">ккал/сутки во время Ultra 600</div>
+        </div>
+        <div class="calorie-note">90 г углеводов и 800–1 000 мг натрия каждый час движения</div>
+      </div>
+    </div>
+
+    <div>
+      <ul class="meal-list">
+        <li class="meal-item">
+          <div class="meal-time">06:30</div>
+          <div class="meal-body">
+            <div class="meal-name">Завтрак атлета</div>
+            <div class="meal-detail">Овсянка (100 г) с бананом и мёдом, 4–5 яиц (варёные или омлет), греческий йогурт 200 г, чёрный кофе. Акцент на медленных углеводах перед длинной пробежкой.</div>
+          </div>
+        </li>
+        <li class="meal-item">
+          <div class="meal-time">10:00</div>
+          <div class="meal-body">
+            <div class="meal-name">Перекус после утренней тренировки</div>
+            <div class="meal-detail">Протеиновый шейк (30–40 г белка), банан, горсть орехов. Потребление в течение 30 минут после нагрузки.</div>
+          </div>
+        </li>
+        <li class="meal-item">
+          <div class="meal-time">13:00</div>
+          <div class="meal-body">
+            <div class="meal-name">Обед</div>
+            <div class="meal-detail">Рис или паста (200–250 г сухого), куриная грудка или лосось 200 г, овощи на гриле, оливковое масло. Большая порция без ограничений.</div>
+          </div>
+        </li>
+        <li class="meal-item">
+          <div class="meal-time">16:30</div>
+          <div class="meal-body">
+            <div class="meal-name">Предтренировочный перекус</div>
+            <div class="meal-detail">Дата-финик или энергетический батончик, 300 мл воды с электролитами. За 45–60 мин до вечерней тренировки.</div>
+          </div>
+        </li>
+        <li class="meal-item">
+          <div class="meal-time">19:30</div>
+          <div class="meal-body">
+            <div class="meal-name">Ужин</div>
+            <div class="meal-detail">Сладкий картофель, нежирное мясо или рыба, зелёный салат. Ограничение простых сахаров вечером. Фокус на восстановлении и регенерации.</div>
+          </div>
+        </li>
+        <li class="meal-item">
+          <div class="meal-time">22:00</div>
+          <div class="meal-body">
+            <div class="meal-name">Ночной протеин</div>
+            <div class="meal-detail">Творог 200 г или казеиновый шейк. Медленный белок на ночь защищает мышцы от катаболизма во время сна.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNIQUE -->
+<section id="technique">
+  <div class="section-eyebrow">Техника бега</div>
+  <h2>Как бежит Arda</h2>
+
+  <div class="technique-grid">
+    <div class="tech-card">
+      <div class="tech-num">01</div>
+      <div>
+        <h3>Постановка стопы</h3>
+        <p>Мидфут-приземление (средняя часть стопы). Стопа падает под проекцией центра масс, а не впереди. Это снижает ударную нагрузку на колени и тазобедренные суставы — критически важно при многодневных забегах.</p>
+      </div>
+    </div>
+
+    <div class="tech-card">
+      <div class="tech-num">02</div>
+      <div>
+        <h3>Каденс и шаг</h3>
+        <p>Оптимальный ритм — 170–180 шагов в минуту. На ультра-дистанциях Arda поддерживает 165–175 spm. Короткий, частый шаг эффективнее длинного — меньше вертикальных колебаний, меньше удары.</p>
+      </div>
+    </div>
+
+    <div class="tech-card">
+      <div class="tech-num">03</div>
+      <div>
+        <h3>Положение корпуса</h3>
+        <p>Лёгкий наклон вперёд от щиколоток (не от поясницы). Взгляд на 10–15 метров перёд. Плечи расслаблены и опущены. Не горбиться — это блокирует дыхание и ускоряет усталость.</p>
+      </div>
+    </div>
+
+    <div class="tech-card">
+      <div class="tech-num">04</div>
+      <div>
+        <h3>Работа рук</h3>
+        <p>Локти согнуты под 90°, руки движутся вперёд-назад (не поперёк тела). Кисти расслаблены — «держи чипс, не раздавив». Правильная работа рук задаёт ритм и помогает поддерживать темп в усталости.</p>
+      </div>
+    </div>
+
+    <div class="tech-card">
+      <div class="tech-num">05</div>
+      <div>
+        <h3>Дыхание</h3>
+        <p>Ритмичное дыхание: 3 шага вдох — 2 шага выдох (3:2) на лёгком темпе; 2:1 на интервалах. При экстремальной жаре в Death Valley — короткие быстрые циклы, активное охлаждение через выдох ртом.</p>
+      </div>
+    </div>
+
+    <div class="tech-card">
+      <div class="tech-num">06</div>
+      <div>
+        <h3>Экономия энергии</h3>
+        <p>На ультра-дистанции главное — не скорость, а эффективность. Arda намеренно снижает темп при жаре, подъёмах и усталости. Ходьба на крутых подъёмах — не слабость, а тактика. Сохрани ноги для следующих 300 км.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENTAL -->
+<section id="mental">
+  <div class="section-eyebrow">Ментальная сила</div>
+  <h2>Философия «Киборга»</h2>
+
+  <div class="quote-block" style="margin-bottom: 60px;">
+    <div class="quote-text">В конце ты всегда борешься только с собой — со своим эго, со своими внутренними демонами. Ты против ты.</div>
+    <div class="quote-attr">— Arda Saatçi</div>
+  </div>
+
+  <div class="principles">
+    <div class="principle">
+      <div class="principle-line"></div>
+      <h3>День первый — всегда</h3>
+      <p>Каждое утро — чистый лист. Arda не живёт вчерашними достижениями. Это защита от самоуспокоения и от катастрофизации неудач. Пробежал вчера 80 км? Сегодня — снова день один.</p>
+    </div>
+
+    <div class="principle">
+      <div class="principle-line"></div>
+      <h3>Ты — воля, не тело</h3>
+      <p>Когда тело кричит «стоп», это не команда к остановке — это запрос тела на экономию. Воля решает, кому подчиняться. Сознательно расширяй разрыв между ощущением дискомфорта и реакцией на него.</p>
+    </div>
+
+    <div class="principle">
+      <div class="principle-line"></div>
+      <h3>Сравнивай только с собой</h3>
+      <p>«Не сравнивай себя с другими» — не клише для Arda, а рабочий инструмент. На маршруте Death Valley он смотрел только на свой темп и своё состояние, не на время. Единственный соперник — вчерашняя версия себя.</p>
+    </div>
+
+    <div class="principle">
+      <div class="principle-line"></div>
+      <h3>Дискомфорт = рост</h3>
+      <p>Выход из зоны комфорта — не метафора, а биологический факт. Митохондрии, нейронные связи, психологическая устойчивость — всё это растёт только в условиях стресса. Поэтому Arda ищет трудности, а не избегает их.</p>
+    </div>
+
+    <div class="principle">
+      <div class="principle-line"></div>
+      <h3>Визуализация финиша</h3>
+      <p>В самые тёмные моменты Ultra 600 — галлюцинации, медицинская остановка — он возвращался к картинке финиша. Санта-Моника, толпа, мама. Конкретный образ заменяет абстрактное «я должен». Визуализируй до деталей.</p>
+    </div>
+
+    <div class="principle">
+      <div class="principle-line"></div>
+      <h3>Звёзды как цель</h3>
+      <p>«Всегда стоит тянуться к звёздам. Даже если не всё идёт идеально» — слова Arda на финише. Амбициозная цель (96 часов) не достигнута, но 600 км пройдены. Смелая цель всегда выигрышнее скромной.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RECOVERY -->
+<section id="recovery">
+  <div class="section-eyebrow">Восстановление</div>
+  <h2>Как «Киборг» восстанавливается</h2>
+
+  <ul class="recovery-list">
+    <li class="recovery-item">
+      <div class="rec-icon">СОН</div>
+      <h3>Сон · Приоритет #1</h3>
+      <p>В базовом цикле — минимум 8–9 часов. Постоянное время отхода (22:30–23:00). Тёмная, прохладная комната (18–20°C). Во время ультра — 20–45-минутные блоки микросна, синхронизированные с командой поддержки.</p>
+    </li>
+
+    <li class="recovery-item">
+      <div class="rec-icon">ВОДА</div>
+      <h3>Гидратация · Электролиты</h3>
+      <p>4–6 л воды в обычный тренировочный день. На Ultra 600 потери жидкости — до 1.5 л/час. Команда рассчитывала микс натрия (800–1 000 мг/ч), калия и магния на основе температуры и пота.</p>
+    </li>
+
+    <li class="recovery-item">
+      <div class="rec-icon">ТЕЛО</div>
+      <h3>Физио · МФР · Криотерапия</h3>
+      <p>Ежедневная работа с физиотерапевтом во время длительных проектов. Миофасциальный релиз роллом 15–20 мин после каждого занятия. Ледяные ванны 10–12°C по 10 мин после длинных пробежек. Компрессионное бельё в дороге.</p>
+    </li>
+
+    <li class="recovery-item">
+      <div class="rec-icon">БАНЯ</div>
+      <h3>Сауна · Тепловая адаптация</h3>
+      <p>2–3 раза в неделю в базовый период. Сауна 80–90°C на 15–20 минут улучшает сердечно-сосудистую адаптацию и повышает выносливость. Одновременно — профилактика теплового удара на жарких трассах.</p>
+    </li>
+
+    <li class="recovery-item">
+      <div class="rec-icon">ЕДА</div>
+      <h3>Питание для восстановления</h3>
+      <p>«Восстановительное окно» — 30 мин после финиша. Быстрые углеводы + белок в соотношении 3:1 (например, банан + шейк). Вечером — казеин для ночного синтеза белка. Противовоспалительные продукты: куркума, ягоды, рыбий жир.</p>
+    </li>
+
+    <li class="recovery-item">
+      <div class="rec-icon">МОЗГ</div>
+      <h3>Ментальное восстановление</h3>
+      <p>После многодневных проектов — полный отдых без тренировок 5–10 дней. Arda позволяет себе «отключиться» от режима. Медитация, прогулки, семья. Психологическое восстановление так же важно, как физическое.</p>
+    </li>
+  </ul>
+</section>
+
+<!-- GEAR -->
+<section id="gear" style="background: var(--dark);">
+  <div class="section-eyebrow">Экипировка</div>
+  <h2>Что носит Arda Saatçi</h2>
+
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 60px;">
+
+    <!-- LEFT: big feature card -->
+    <div style="background: var(--panel); padding: 48px 40px; grid-row: span 2; position: relative; overflow: hidden;">
+      <div style="position:absolute; top:-20px; right:-20px; font-family:'Bebas Neue',sans-serif; font-size:200px; color:rgba(232,0,28,0.04); line-height:1; pointer-events:none;">RUN</div>
+      <div class="section-eyebrow" style="margin-bottom:16px;">Официальный партнёр</div>
+      <h3 style="font-size:clamp(28px,4vw,48px); font-family:'Bebas Neue',sans-serif; font-weight:400; letter-spacing:0.06em; color:var(--white); margin-bottom:20px; line-height:1;">Brooks Running<br><span style="color:var(--red);">Glycerin Max</span></h3>
+      <p style="margin-bottom:24px;">С сентября 2025 года Brooks — единственный обувной партнёр Arda. Именно в Glycerin Max он пробежал всю Японию (3 028 км) и Death Valley. Максимальная амортизация ДНА-пены поглощает удары при многодневном беге по асфальту.</p>
+      <p style="margin-bottom:32px;">Ключевые свойства: высокий стек подошвы (~38 мм), плавный перекат, широкий носок для отёкших стоп на поздних этапах ультра. Arda специально тестировал обувь на тредмиле в тепловом снаряжении — полная симуляция условий трассы.</p>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <div style="border:1px solid rgba(232,0,28,0.35); padding:10px 18px;">
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--red); line-height:1;">38 мм</div>
+          <div style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--offwhite); margin-top:3px;">Стек подошвы</div>
+        </div>
+        <div style="border:1px solid rgba(232,0,28,0.35); padding:10px 18px;">
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--red); line-height:1;">3 028+</div>
+          <div style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--offwhite); margin-top:3px;">Км в этой модели</div>
+        </div>
+        <div style="border:1px solid rgba(232,0,28,0.35); padding:10px 18px;">
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--red); line-height:1;">DNA</div>
+          <div style="font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--offwhite); margin-top:3px;">Пена подошвы</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT top -->
+    <div style="background: var(--panel); padding: 36px 32px;">
+      <div class="card-icon"></div>
+      <h3 style="font-size:16px; margin-bottom:12px;">Одежда в жару</h3>
+      <p style="font-size:13px; line-height:1.7; max-width:100%;">На Ultra 600 в Долине Смерти (+40°C) Arda выбирал светлые UV-защитные лонгсливы из мерино или дышащего нейлона. Длинные рукава лучше открытой кожи — отражают жару и защищают от солнечных ожогов. Манишка и бафф на шею. Смена одежды каждые 4–6 часов.</p>
+    </div>
+
+    <!-- RIGHT bottom -->
+    <div style="background: var(--panel); padding: 36px 32px;">
+      <div class="card-icon"></div>
+      <h3 style="font-size:16px; margin-bottom:12px;">Головные уборы и очки</h3>
+      <p style="font-size:13px; line-height:1.7; max-width:100%;">Ротация кепок каждые несколько часов — влажную меняют на сухую. Широкополая панама в пиковую жару (12:00–16:00). Поляризованные солнечные очки с UV400 обязательны — асфальт отражает свет снизу. Ночью — фронтальный налобный фонарь 300+ люмен.</p>
+    </div>
+
+  </div>
+
+  <!-- gear list row -->
+  <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:2px; margin-top:2px;">
+    <div style="background:var(--panel); padding:28px 24px;">
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:36px; color:var(--red); margin-bottom:12px; line-height:1;">НОСКИ</div>
+      <p style="font-size:13px; line-height:1.65; color:var(--offwhite); max-width:100%;">Двойные антипузырные носки (Drymax, Injinji). Смена каждые 40–50 км. На ультра мозоли — главная угроза после жары. Arda меняет носки и смазывает стопы BodyGlide или вазелином при каждой остановке команды.</p>
+    </div>
+    <div style="background:var(--panel); padding:28px 24px;">
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:36px; color:var(--red); margin-bottom:12px; line-height:1;">ЧАСЫ</div>
+      <p style="font-size:13px; line-height:1.65; color:var(--offwhite); max-width:100%;">GPS-часы с ЧСС-монитором — непрерывный мониторинг. Целевой диапазон пульса на ультра: 85–110 уд/мин. Превышение 140 — сигнал замедлиться. При Ultra 600 средний пульс составил ~90 уд/мин, пик — 165.</p>
+    </div>
+    <div style="background:var(--panel); padding:28px 24px;">
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:36px; color:var(--red); margin-bottom:12px; line-height:1;">ГЕЛИ</div>
+      <p style="font-size:13px; line-height:1.65; color:var(--offwhite); max-width:100%;">Каждые 40–45 минут: энергетический гель (22–25 г углеводов) + 200 мл электролитного напитка. Норма: до 90 г углеводов в час при движении. Приём во время бега — не останавливаясь. Желудок тренируется так же, как ноги.</p>
+    </div>
+    <div style="background:var(--panel); padding:28px 24px;">
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:36px; color:var(--red); margin-bottom:12px; line-height:1;">КОМПР.</div>
+      <p style="font-size:13px; line-height:1.65; color:var(--offwhite); max-width:100%;">Компрессионные гетры на голень — в транспорте и на отдыхе. Улучшают венозный возврат, снижают отёчность. После Ultra 600 — компрессионные шорты 72 часа непрерывно. Физиотерапевт оценивает состояние мышц на каждой остановке.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ULTRA 600 DIARY -->
+<section id="diary" style="background: var(--charcoal);">
+  <div class="section-eyebrow">Cyborg Season · 2026</div>
+  <h2>Дневник Ultra 600</h2>
+  <p style="margin-bottom: 60px; max-width:620px;">5–10 мая 2026 года. Долина Смерти → Санта-Моника. 604.6 км. 123 часа 21 минута. Более 1 млн зрителей в прямом эфире. Вот как это было — день за днём.</p>
+
+  <div style="display: flex; flex-direction: column; gap: 2px;">
+
+    <!-- Day 1 -->
+    <div style="display:grid; grid-template-columns: 120px 1fr 240px; gap:0; background: var(--panel); overflow:hidden;">
+      <div style="background: var(--red); padding: 32px 24px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+        <div style="font-family:'Bebas Neue',sans-serif; font-size:64px; color:white; line-height:0.9;">01</div>
+        <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.7); margin-top:6px;">День</div>
+      </div>
+      <div style="padding: 32px 36px;">
+        <div style="font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:10px;">5 мая · Badwater Basin → Трасса 190</div>
+        <h3 style="font-size:20px; margin-bottom:12px;">Старт в аду</h3>
+        <p style="font-size:14px; line-height:1.75; color:var(--offwhite); max-width:100%;">11:00 по местному времени — старт у таблички Badwater Basin (−85.5 м над уровнем моря). Температура воздуха +42°C, асфальт раскалён до 58°C. Первые километры Arda бежит уверенно, держа темп 7:30 мин/км. Команда сопровождения каждые 3 км подаёт воду и электролиты. К вечеру — набор высоты через Panamint Valley. Arda проходит 120 км за первые сутки с двумя 25-минутными микросонами.</p>
+      </div>
+      <div style="background: rgba(0,0,0,0.25); padding: 32px 24px; display:flex; flex-direction:column; gap:16px; justify-content:center;">
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:40px; color:var(--white); line-height:1;">120 KM</div>
+          <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--offwhite);">Пройдено</div>
+        </div>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:40px; color:var(--red); line-height:1;">+42°C</div>
+          <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--offwhite);">Температура</div>
+        </div>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:40px; color:var(--accent); line-height:1;">7:30</div>
+          <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--offwhite);">Мин/км · средний темп</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div style="display:grid; grid-template-columns: 120px 1fr 240px; gap:0; background: var(--mid); overflow:hidden;">
+      <div style="background: #a80015; padding: 32px 24px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+        <div style="font-family:'Bebas Neue',sans-serif; font-size:64px; color:white; line-height:0.9;">02</div>
+        <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.7); margin-top:6px;">День</div>
+      </div>
+      <div style="padding: 32px 36px;">
+        <div style="font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:10px;">6 мая · Пустыня Мохаве</div>
+        <h3 style="font-size:20px; margin-bottom:12px;">Первый кризис</h3>
+        <p style="font-size:14px; line-height:1.75; color:var(--offwhite); max-width:100%;">Ночь дала восстановление, но рассвет принёс новую жару. Потери жидкости — до 1.5 л/час. Arda замечает лёгкую дезориентацию. Команда усиливает протокол натрия. Вводится правило: каждые 20 мин — 150–200 мл электролитного раствора независимо от жажды. К полудню — 180 км нарастающим итогом. Темп снижается до 8:00–8:30 мин/км. Первые мозоли, смена носков, обработка стоп.</p>
+      </div>
+      <div style="background: rgba(0,0,0,0.25); padding: 32px 24px; display:flex; flex-direction:column; gap:16px; justify-content:center;">
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:40px; color:var(--white); line-height:1;">180 KM</div>
+          <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--offwhite);">Нарастающим итогом</div>
+        </div>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:40px; color:var(--red); line-height:1;">1.5 Л/Ч</div>
+          <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--offwhite);">Потеря пота</div>
+        </div>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:40px; color:var(--accent); line-height:1;">8:30</div>
+          <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--offwhite);">Мин/км · снижение</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 3 -->
+    <div style="display:grid; grid-template-columns: 120px 1fr 240px; gap:0; background: var(--panel); overflow:hidden;">
+      <div style="background: #7a0010; padding: 32px 24px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+        <div style="font-family:'Bebas Neue',sans-serif; font-size:64px; color:white; line-height:0.9;">03</div>
+        <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.7); margin-top:6px;">День</div>
+      </div>
+      <div style="padding: 32px 36px;">
+        <div style="font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--red); margin-bottom:10px;">7 мая · Медицинская остановка ⚠</div>
+        <h3 style="font-size:20px; margin-bottom:12px;">На грани — и дальше</h3>
+        <p style="font-size:14px; line-height:1.75; color:var(--offwhite); max-width:100%;">Критический момент всего проекта. Галлюцинации, нарушение сердечного ритма, критическое обезвоживание. Медицинская команда принимает решение об обязательной остановке. Arda проводит несколько часов на капельнице. Это разрушает план 96 часов. Но после восстановления он встаёт и возобновляет движение. Прошёл ≈ 270 км. Этот день Arda позже назовёт «моментом, когда настоящее испытание только началось».</p>
+      </div>
+      <div style="background: rgba(0,0,0,0.25); padding: 32px 24px; display:flex; flex-direction:column; gap:16px; justify-content:center;">
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:40px; color:var(--white); line-height:1;">270 KM</div>
+          <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--offwhite);">Нарастающим итогом</div>
+        </div>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:40px; color:var(--red); line-height:1;">МЕДИК</div>
+          <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--offwhite);">Принудительная пауза</div>
+        </div>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:40px; color:var(--accent); line-height:1;">↑↑↑</div>
+          <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--offwhite);">Встал и продолжил</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 4-5 -->
+    <div style="display:grid; grid-template-columns: 120px 1fr 240px; gap:0; background: var(--mid); overflow:hidden;">
+      <div style="background: #5a000c; padding: 32px 24px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+        <div style="font-family:'Bebas Neue',sans-serif; font-size:64px; color:white; line-height:0.9;">04</div>
+        <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.7); margin-top:6px;">— 05</div>
+      </div>
+      <div style="padding: 32px 36px;">
+        <div style="font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent); margin-bottom:10px;">8–9 мая · Route 66 → Окраины Лос-Анджелеса</div>
+        <h3 style="font-size:20px; margin-bottom:12px;">Машинный режим</h3>
+        <p style="font-size:14px; line-height:1.75; color:var(--offwhite); max-width:100%;">Боль в ногах стала фоновым шумом. Arda переходит в состояние, которое ультра-бегуны называют «машинным режимом» — тело движется автономно, разум отключён от ощущений. Он чередует бег (8–9 мин/км) с быстрой ходьбой на подъёмах. Исторический Route 66 сменяется пригородами Лос-Анджелеса. Аудитория в прямом эфире пробивает 800 000 человек. Дэвид Алаба, Антонио Рюдигер, Памела Райф — все смотрят онлайн.</p>
+      </div>
+      <div style="background: rgba(0,0,0,0.25); padding: 32px 24px; display:flex; flex-direction:column; gap:16px; justify-content:center;">
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:40px; color:var(--white); line-height:1;">500+ KM</div>
+          <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--offwhite);">Рубеж пройден</div>
+        </div>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:40px; color:var(--red); line-height:1;">800K</div>
+          <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--offwhite);">Зрителей онлайн</div>
+        </div>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:40px; color:var(--accent); line-height:1;">Route 66</div>
+          <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:var(--offwhite);">Легендарная трасса</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Day 5 - Finish -->
+    <div style="display:grid; grid-template-columns: 120px 1fr 240px; gap:0; background: var(--red); overflow:hidden;">
+      <div style="background: rgba(0,0,0,0.3); padding: 32px 24px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+        <div style="font-family:'Bebas Neue',sans-serif; font-size:64px; color:white; line-height:0.9;">ФИНИШ</div>
+      </div>
+      <div style="padding: 32px 36px;">
+        <div style="font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.7); margin-bottom:10px;">10 мая · Santa Monica Pier · 1 млн+ зрителей</div>
+        <h3 style="font-size:20px; margin-bottom:12px; color:white;">604.6 км · 123 ч 21 мин</h3>
+        <p style="font-size:14px; line-height:1.75; color:rgba(255,255,255,0.85); max-width:100%;">Пирс Санта-Моники. Толпа болельщиков. Его мама на финише — после церемонии они пошли есть мороженое. Хамит Алтынтоп лично встретил Arda и вручил подписанную футболку сборной Турции от Кенана Йылдыза. Капитан Хакан Чалханоглу подключился по видеозвонку. Слова на финише: «Всегда стоит тянуться к звёздам. Даже если не всё идёт идеально».</p>
+      </div>
+      <div style="background: rgba(0,0,0,0.2); padding: 32px 24px; display:flex; flex-direction:column; gap:16px; justify-content:center;">
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:40px; color:white; line-height:1;">75 000</div>
+          <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.65);">Сожжённых калорий</div>
+        </div>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:40px; color:white; line-height:1;">6 000M</div>
+          <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.65);">Набор высоты</div>
+        </div>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:40px; color:white; line-height:1;">1M+</div>
+          <div style="font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.65);">Зрителей в эфире</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BEGINNER PLAN -->
+<section id="beginner" style="background: var(--dark);">
+  <div class="section-eyebrow">Для начинающих</div>
+  <h2>12-недельный план<br>по методу Arda</h2>
+  <p style="margin-bottom:60px;">Arda начинал с нуля. Его подход — постепенность, дисциплина, ежедневность. Этот план адаптирован для людей без беговой базы, которые хотят прийти к первому полумарафону.</p>
+
+  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;">
+
+    <!-- Phase 1 -->
+    <div style="background:var(--panel); padding:0; grid-column: span 4;">
+      <div style="background:rgba(232,0,28,0.12); border-left:4px solid var(--red); padding:20px 28px;">
+        <div style="font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--red); letter-spacing:0.06em;">ФАЗА 1 · НЕДЕЛИ 1–3 · ПРОБУЖДЕНИЕ</div>
+        <p style="font-size:13px; color:var(--offwhite); margin-top:6px;">Цель — выработать привычку. Тело адаптируется к регулярной нагрузке. Никакой скорости — только движение.</p>
+      </div>
+    </div>
+    <div style="background:var(--panel); padding:28px 24px;">
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--red); margin-bottom:12px;">ПН / СР / ПТ</div>
+      <p style="font-size:13px; line-height:1.7; color:var(--offwhite);">Чередование бег/ходьба: 1 мин бег — 2 мин ходьба × 10 повторений. Итого 30 мин. Темп — как будто разговариваете по телефону без запышки.</p>
+    </div>
+    <div style="background:var(--panel); padding:28px 24px;">
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--red); margin-bottom:12px;">ВТ / ЧТ</div>
+      <p style="font-size:13px; line-height:1.7; color:var(--offwhite);">20–25 мин быстрой ходьбы + 15 мин растяжка. МФР-ролл на икры и квадрицепс. Это не «отдых» — это активное восстановление.</p>
+    </div>
+    <div style="background:var(--panel); padding:28px 24px;">
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--red); margin-bottom:12px;">СУББОТА</div>
+      <p style="font-size:13px; line-height:1.7; color:var(--offwhite);">Длинная прогулка/трусца 40–50 мин в удовольствие. Без давления. Фокус на дыхании. Слушайте музыку или подкаст — главное не останавливаться.</p>
+    </div>
+    <div style="background:var(--panel); padding:28px 24px;">
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--red); margin-bottom:12px;">ВОСКРЕСЕНЬЕ</div>
+      <p style="font-size:13px; line-height:1.7; color:var(--offwhite);">Полный отдых. Дать телу суперкомпенсироваться. Выспитесь. Приготовьте правильную еду на неделю.</p>
+    </div>
+
+    <!-- Phase 2 -->
+    <div style="background:var(--panel); padding:0; grid-column: span 4; margin-top:2px;">
+      <div style="background:rgba(212,168,67,0.1); border-left:4px solid var(--accent); padding:20px 28px;">
+        <div style="font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--accent); letter-spacing:0.06em;">ФАЗА 2 · НЕДЕЛИ 4–7 · БАЗА</div>
+        <p style="font-size:13px; color:var(--offwhite); margin-top:6px;">Непрерывный бег заменяет интервалы. Объём растёт. Тело строит аэробный фундамент.</p>
+      </div>
+    </div>
+    <div style="background:var(--panel); padding:28px 24px;">
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--accent); margin-bottom:12px;">ПН</div>
+      <p style="font-size:13px; line-height:1.7; color:var(--offwhite);">Непрерывный бег 25–30 мин, зона 2. Если начинаете задыхаться — замедлитесь, не останавливайтесь. Медленный бег всегда лучше ходьбы на этом этапе.</p>
+    </div>
+    <div style="background:var(--panel); padding:28px 24px;">
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--accent); margin-bottom:12px;">СР</div>
+      <p style="font-size:13px; line-height:1.7; color:var(--offwhite);">Темповой бег: разминка 10 мин + 15 мин чуть быстрее нормы + 5 мин заминка. Это первый намёк на скоростную работу. Контролируйте пульс.</p>
+    </div>
+    <div style="background:var(--panel); padding:28px 24px;">
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--accent); margin-bottom:12px;">ПТ</div>
+      <p style="font-size:13px; line-height:1.7; color:var(--offwhite);">Восстановительный бег 20 мин + упражнения ОФП: планка, выпады, ягодичный мост. 3 подхода. Сила ног — защита от травм.</p>
+    </div>
+    <div style="background:var(--panel); padding:28px 24px;">
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--accent); margin-bottom:12px;">СБ</div>
+      <p style="font-size:13px; line-height:1.7; color:var(--offwhite);">Длинный бег: неделя 4 — 45 мин, неделя 7 — 75 мин. Темп медленный. Берите воду. Первый раз попробуйте энергетический гель на 45-й минуте.</p>
+    </div>
+
+    <!-- Phase 3 -->
+    <div style="background:var(--panel); padding:0; grid-column: span 4; margin-top:2px;">
+      <div style="background:rgba(232,0,28,0.08); border-left:4px solid rgba(232,0,28,0.6); padding:20px 28px;">
+        <div style="font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--white); letter-spacing:0.06em;">ФАЗА 3 · НЕДЕЛИ 8–12 · ПОЛУМАРАФОН</div>
+        <p style="font-size:13px; color:var(--offwhite); margin-top:6px;">Длинные воскресные пробежки достигают 18–20 км. Добавляются интервалы. Финал — 21.1 км.</p>
+      </div>
+    </div>
+    <div style="background:var(--panel); padding:28px 24px;">
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--white); margin-bottom:12px;">ВТ</div>
+      <p style="font-size:13px; line-height:1.7; color:var(--offwhite);">5 × 1 000 м с отдыхом 90 сек. Темп — «тяжело, но терпимо». Это формирует скоростную выносливость и улучшает экономичность бега.</p>
+    </div>
+    <div style="background:var(--panel); padding:28px 24px;">
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--white); margin-bottom:12px;">ЧТ</div>
+      <p style="font-size:13px; line-height:1.7; color:var(--offwhite);">Темповой бег 30–40 мин в соревновательном темпе. Это репетиция гонки. Привыкните к ощущению «неудобно, но я справляюсь».</p>
+    </div>
+    <div style="background:var(--panel); padding:28px 24px;">
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--white); margin-bottom:12px;">ВС</div>
+      <p style="font-size:13px; line-height:1.7; color:var(--offwhite);">Длинный бег: нед. 8 — 14 км, нед. 10 — 18 км, нед. 11 — 20 км. Неделя 12 — тейпер: 10 км легко. Старт на полумарафоне!</p>
+    </div>
+    <div style="background:var(--panel); padding:28px 24px;">
+      <div style="font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--white); margin-bottom:12px;">Мантра</div>
+      <p style="font-size:13px; line-height:1.7; color:var(--offwhite);">На трудных тренировках повторяйте: «День первый». Это уберёт груз прошлых неудач и будущих страхов. Только этот момент, только этот шаг.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- PACE CALCULATOR -->
+<section id="calculator" style="background: var(--charcoal);">
+  <div class="section-eyebrow">Инструмент бегуна</div>
+  <h2>Калькулятор темпа</h2>
+  <p style="margin-bottom: 48px; max-width: 560px;">Введи дистанцию и желаемое время — получишь нужный темп. Или укажи темп и дистанцию — узнаешь финишное время.</p>
+
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:2px; max-width:900px;">
+
+    <!-- Mode A: time → pace -->
+    <div style="background:var(--panel); padding:40px 36px;" id="calcA">
+      <div style="font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:var(--red); margin-bottom:24px;">Время → Темп</div>
+      <h3 style="font-size:16px; margin-bottom:24px;">Какой темп нужен для цели?</h3>
+
+      <div style="margin-bottom:20px;">
+        <label style="font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--offwhite); display:block; margin-bottom:8px;">Дистанция</label>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button onclick="setDistA(5)" style="background:transparent; border:1px solid rgba(232,0,28,0.4); color:var(--offwhite); padding:8px 16px; font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.background='rgba(232,0,28,0.15)'" onmouseout="this.style.background='transparent'">5 КМ</button>
+          <button onclick="setDistA(10)" style="background:transparent; border:1px solid rgba(232,0,28,0.4); color:var(--offwhite); padding:8px 16px; font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.background='rgba(232,0,28,0.15)'" onmouseout="this.style.background='transparent'">10 КМ</button>
+          <button onclick="setDistA(21.1)" style="background:transparent; border:1px solid rgba(232,0,28,0.4); color:var(--offwhite); padding:8px 16px; font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.background='rgba(232,0,28,0.15)'" onmouseout="this.style.background='transparent'">ПМ</button>
+          <button onclick="setDistA(42.195)" style="background:transparent; border:1px solid rgba(232,0,28,0.4); color:var(--offwhite); padding:8px 16px; font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.background='rgba(232,0,28,0.15)'" onmouseout="this.style.background='transparent'">МАРАФОН</button>
+        </div>
+        <input id="distA" type="number" placeholder="Или введи км..." value="10"
+          style="width:100%; margin-top:10px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:0; color:var(--white); padding:12px 16px; font-family:'Barlow',sans-serif; font-size:14px; outline:none;">
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:24px;">
+        <div>
+          <label style="font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--offwhite); display:block; margin-bottom:6px;">Часы</label>
+          <input id="tHours" type="number" min="0" max="24" placeholder="0"
+            style="width:100%; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:var(--white); padding:12px 12px; font-family:'Bebas Neue',sans-serif; font-size:24px; outline:none; text-align:center;">
+        </div>
+        <div>
+          <label style="font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--offwhite); display:block; margin-bottom:6px;">Минуты</label>
+          <input id="tMins" type="number" min="0" max="59" placeholder="50"
+            style="width:100%; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:var(--white); padding:12px 12px; font-family:'Bebas Neue',sans-serif; font-size:24px; outline:none; text-align:center;">
+        </div>
+        <div>
+          <label style="font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--offwhite); display:block; margin-bottom:6px;">Секунды</label>
+          <input id="tSecs" type="number" min="0" max="59" placeholder="0"
+            style="width:100%; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:var(--white); padding:12px 12px; font-family:'Bebas Neue',sans-serif; font-size:24px; outline:none; text-align:center;">
+        </div>
+      </div>
+
+      <button onclick="calcPace()"
+        style="width:100%; background:var(--red); border:none; color:white; padding:16px; font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:0.15em; cursor:pointer; transition:background 0.2s;"
+        onmouseover="this.style.background='#c0001a'" onmouseout="this.style.background='var(--red)'">
+        РАССЧИТАТЬ ТЕМП
+      </button>
+
+      <div id="resultA" style="margin-top:24px; display:none;">
+        <div style="background:rgba(232,0,28,0.08); border-left:3px solid var(--red); padding:20px 24px;">
+          <div style="font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--offwhite); margin-bottom:8px;">Нужный темп</div>
+          <div id="paceResult" style="font-family:'Bebas Neue',sans-serif; font-size:52px; color:var(--red); line-height:1;"></div>
+          <div style="font-size:11px; color:var(--offwhite); margin-top:4px;">мин/км</div>
+          <div id="paceComment" style="font-size:13px; color:var(--offwhite); margin-top:12px; line-height:1.6;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mode B: pace → time -->
+    <div style="background:var(--panel); padding:40px 36px;" id="calcB">
+      <div style="font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:var(--accent); margin-bottom:24px;">Темп → Время</div>
+      <h3 style="font-size:16px; margin-bottom:24px;">Сколько времени займёт дистанция?</h3>
+
+      <div style="margin-bottom:20px;">
+        <label style="font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--offwhite); display:block; margin-bottom:8px;">Дистанция (км)</label>
+        <input id="distB" type="number" placeholder="42.195" value="42.195"
+          style="width:100%; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:var(--white); padding:12px 16px; font-family:'Barlow',sans-serif; font-size:14px; outline:none;">
+      </div>
+
+      <div style="margin-bottom:24px;">
+        <label style="font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--offwhite); display:block; margin-bottom:8px;">Темп (мин/км)</label>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <div>
+            <label style="font-size:10px; color:rgba(200,192,181,0.6); display:block; margin-bottom:6px;">Минуты</label>
+            <input id="pMin" type="number" min="2" max="20" placeholder="5"
+              style="width:100%; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:var(--white); padding:12px 12px; font-family:'Bebas Neue',sans-serif; font-size:24px; outline:none; text-align:center;">
+          </div>
+          <div>
+            <label style="font-size:10px; color:rgba(200,192,181,0.6); display:block; margin-bottom:6px;">Секунды</label>
+            <input id="pSec" type="number" min="0" max="59" placeholder="30"
+              style="width:100%; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:var(--white); padding:12px 12px; font-family:'Bebas Neue',sans-serif; font-size:24px; outline:none; text-align:center;">
+          </div>
+        </div>
+
+        <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
+          <button onclick="setPaceB(5,0)" style="background:transparent; border:1px solid rgba(212,168,67,0.4); color:var(--offwhite); padding:6px 12px; font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.08em; cursor:pointer;" onmouseover="this.style.background='rgba(212,168,67,0.15)'" onmouseout="this.style.background='transparent'">5:00</button>
+          <button onclick="setPaceB(5,30)" style="background:transparent; border:1px solid rgba(212,168,67,0.4); color:var(--offwhite); padding:6px 12px; font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.08em; cursor:pointer;" onmouseover="this.style.background='rgba(212,168,67,0.15)'" onmouseout="this.style.background='transparent'">5:30</button>
+          <button onclick="setPaceB(6,0)" style="background:transparent; border:1px solid rgba(212,168,67,0.4); color:var(--offwhite); padding:6px 12px; font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.08em; cursor:pointer;" onmouseover="this.style.background='rgba(212,168,67,0.15)'" onmouseout="this.style.background='transparent'">6:00</button>
+          <button onclick="setPaceB(7,0)" style="background:transparent; border:1px solid rgba(212,168,67,0.4); color:var(--offwhite); padding:6px 12px; font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.08em; cursor:pointer;" onmouseover="this.style.background='rgba(212,168,67,0.15)'" onmouseout="this.style.background='transparent'">7:00</button>
+          <button onclick="setPaceB(8,0)" style="background:transparent; border:1px solid rgba(212,168,67,0.4); color:var(--offwhite); padding:6px 12px; font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:600; letter-spacing:0.08em; cursor:pointer;" onmouseover="this.style.background='rgba(212,168,67,0.15)'" onmouseout="this.style.background='transparent'">8:00</button>
+        </div>
+      </div>
+
+      <button onclick="calcTime()"
+        style="width:100%; background:var(--accent); border:none; color:var(--dark); padding:16px; font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:0.15em; cursor:pointer; transition:background 0.2s;"
+        onmouseover="this.style.background='#c49030'" onmouseout="this.style.background='var(--accent)'">
+        РАССЧИТАТЬ ВРЕМЯ
+      </button>
+
+      <div id="resultB" style="margin-top:24px; display:none;">
+        <div style="background:rgba(212,168,67,0.08); border-left:3px solid var(--accent); padding:20px 24px;">
+          <div style="font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--offwhite); margin-bottom:8px;">Финишное время</div>
+          <div id="timeResult" style="font-family:'Bebas Neue',sans-serif; font-size:52px; color:var(--accent); line-height:1;"></div>
+          <div id="speedResult" style="font-size:13px; color:var(--offwhite); margin-top:8px;"></div>
+          <div id="timeComment" style="font-size:13px; color:var(--offwhite); margin-top:12px; line-height:1.6;"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- QUOTES WALL -->
+<section style="background: var(--dark); padding: 80px 6vw;">
+  <div class="section-eyebrow">Слова, которые двигают</div>
+  <h2 style="margin-bottom: 48px;">Arda о беге и жизни</h2>
+
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;">
+
+    <div style="background:var(--panel); padding:36px 30px; position:relative; overflow:hidden;">
+      <div style="position:absolute; top:-30px; left:10px; font-family:'Bebas Neue',sans-serif; font-size:160px; color:rgba(232,0,28,0.05); line-height:1; pointer-events:none;">"</div>
+      <p style="font-family:'Barlow Condensed',sans-serif; font-size:clamp(16px,2vw,22px); font-style:italic; font-weight:300; line-height:1.45; color:var(--white); position:relative; z-index:1; max-width:100%;">Каждый день — это битва с самим собой. Со своим эго. Со своими внутренними демонами. Ты против ты.</p>
+      <div style="width:32px; height:2px; background:var(--red); margin-top:20px;"></div>
+    </div>
+
+    <div style="background:var(--mid); padding:36px 30px; position:relative; overflow:hidden;">
+      <div style="position:absolute; top:-30px; left:10px; font-family:'Bebas Neue',sans-serif; font-size:160px; color:rgba(232,0,28,0.05); line-height:1; pointer-events:none;">"</div>
+      <p style="font-family:'Barlow Condensed',sans-serif; font-size:clamp(16px,2vw,22px); font-style:italic; font-weight:300; line-height:1.45; color:var(--white); position:relative; z-index:1; max-width:100%;">Каждое утро у тебя есть шанс заново решить, кто ты и какие границы хочешь раздвинуть.</p>
+      <div style="width:32px; height:2px; background:var(--red); margin-top:20px;"></div>
+    </div>
+
+    <div style="background:var(--panel); padding:36px 30px; position:relative; overflow:hidden;">
+      <div style="position:absolute; top:-30px; left:10px; font-family:'Bebas Neue',sans-serif; font-size:160px; color:rgba(232,0,28,0.05); line-height:1; pointer-events:none;">"</div>
+      <p style="font-family:'Barlow Condensed',sans-serif; font-size:clamp(16px,2vw,22px); font-style:italic; font-weight:300; line-height:1.45; color:var(--white); position:relative; z-index:1; max-width:100%;">Не сравнивай себя с другими. Единственный, с кем ты соревнуешься — это ты вчера.</p>
+      <div style="width:32px; height:2px; background:var(--red); margin-top:20px;"></div>
+    </div>
+
+    <div style="background:var(--red); padding:36px 30px; grid-column: span 3; display:flex; align-items:center; justify-content:space-between; gap:40px; flex-wrap:wrap;">
+      <p style="font-family:'Bebas Neue',sans-serif; font-size:clamp(24px,3.5vw,44px); line-height:1.1; color:white; flex:1; letter-spacing:0.03em; min-width:280px;">«Всегда стоит тянуться к звёздам. Даже если не всё идёт идеально»</p>
+      <div style="font-family:'Barlow Condensed',sans-serif; font-size:13px; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.7); white-space:nowrap;">— Финиш Ultra 600<br>Санта-Моника, 10 мая 2026</div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Калькулятор A: время → темп
+  let distAval = 10;
+
+  function setDistA(d) {
+    distAval = d;
+    document.getElementById('distA').value = d;
+  }
+
+  function calcPace() {
+    const dist = parseFloat(document.getElementById('distA').value) || distAval;
+    const h = parseInt(document.getElementById('tHours').value) || 0;
+    const m = parseInt(document.getElementById('tMins').value) || 0;
+    const s = parseInt(document.getElementById('tSecs').value) || 0;
+    const totalSec = h * 3600 + m * 60 + s;
+    if (!totalSec || !dist) return;
+
+    const paceSecPerKm = totalSec / dist;
+    const paceMin = Math.floor(paceSecPerKm / 60);
+    const paceSec = Math.round(paceSecPerKm % 60);
+    const speedKmh = (dist / (totalSec / 3600)).toFixed(1);
+
+    let comment = '';
+    if (paceSecPerKm < 240) comment = 'Элитный темп. Серьёзная скоростная работа.';
+    else if (paceSecPerKm < 300) comment = 'Темп соревновательного любителя. Требует серьёзной подготовки.';
+    else if (paceSecPerKm < 360) comment = 'Хорошая форма. Arda рекомендует этот диапазон для темповых тренировок.';
+    else if (paceSecPerKm < 450) comment = 'Комфортный марафонский темп большинства бегунов.';
+    else if (paceSecPerKm < 540) comment = 'Темп для длинных тренировок и зоны 2 по методу Arda.';
+    else comment = 'Медленный темп — идеален для восстановительных пробежек и ультра-дистанций.';
+
+    document.getElementById('paceResult').textContent = `${paceMin}:${String(paceSec).padStart(2,'0')}`;
+    document.getElementById('paceComment').textContent = comment + ` Скорость: ${speedKmh} км/ч.`;
+    document.getElementById('resultA').style.display = 'block';
+  }
+
+  // Калькулятор B: темп → время
+  function setPaceB(m, s) {
+    document.getElementById('pMin').value = m;
+    document.getElementById('pSec').value = s;
+  }
+
+  function calcTime() {
+    const dist = parseFloat(document.getElementById('distB').value) || 42.195;
+    const pMin = parseInt(document.getElementById('pMin').value) || 5;
+    const pSec = parseInt(document.getElementById('pSec').value) || 0;
+    const paceSec = pMin * 60 + pSec;
+    const totalSec = Math.round(paceSec * dist);
+
+    const h = Math.floor(totalSec / 3600);
+    const m = Math.floor((totalSec % 3600) / 60);
+    const s = totalSec % 60;
+    const speed = (3600 / paceSec).toFixed(1);
+
+    let comment = '';
+    if (dist === 42.195) {
+      if (totalSec < 7200) comment = 'Мировой рекорд — нереально. Это теоретически.';
+      else if (totalSec < 9000) comment = 'Уровень элиты. Топ-100 марафонцев мира.';
+      else if (totalSec < 10800) comment = 'Суб-3 часа — мечта большинства любителей.';
+      else if (totalSec < 12600) comment = 'Хороший любительский результат.';
+      else if (totalSec < 15000) comment = 'Средний финишёр. Работать над темпом!';
+      else comment = 'Главное — финишировать. Arda одобряет 💪';
+    } else {
+      comment = `Скорость: ${speed} км/ч. Применяй зону 2 Arda для длинных тренировок на этом темпе.`;
+    }
+
+    const timeStr = h > 0
+      ? `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`
+      : `${m}:${String(s).padStart(2,'0')}`;
+
+    document.getElementById('timeResult').textContent = timeStr;
+    document.getElementById('speedResult').textContent = `Скорость: ${speed} км/ч`;
+    document.getElementById('timeComment').textContent = comment;
+    document.getElementById('resultB').style.display = 'block';
+  }
+</script>
+
+<div class="red-rule"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">Arda<br><span>Saatçi</span></div>
+    <p class="footer-desc">Беговой гайд на основе публичных материалов Red Bull, Brooks Running и интервью атлета. Данные о питании и тренировках взяты из документальных источников о проектах Cyborg Season.</p>
+  </div>
+  <div class="footer-right">
+    <div class="footer-motto">«Каждое утро ты можешь заново решить, кто ты есть и какие границы хочешь раздвинуть»</div>
+    <div class="footer-copy">@ardasaatci · Red Bull Athlete · Brooks Running · 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
